@@ -18,13 +18,13 @@ sudo mysql -u root -p se_db <
 ## 其他設定
 ### Crontab
 ```
-* * * * * /usr/bin/php /var/www/leoMail/artisan schedule:run >/dev/null 2>&1
+* * * * * /usr/bin/php /var/www/se_system/artisan schedule:run >/dev/null 2>&1
 ```
 ### Supervisor
 ```
 [program:laravel-worker]
 process_name=%(program_name)s_%(process_num)02d
-command=/usr/bin/php /var/www/leoMail/artisan queue:work --sleep=3 --tries=1 --memory=2048 --timeout=0
+command=/usr/bin/php /var/www/se_system/artisan queue:work --sleep=3 --tries=1 --memory=2048 --timeout=0
 autostart=true
 autorestart=true
 user=www-data
@@ -46,12 +46,16 @@ stdout_logfile=/var/log/supervisor/laravel_supervisor.log
 
 ## Production
 * `git clone xxx`
+    * `sudo chown ubuntu:ubuntu se_system -R`
+
 * `set .env`
 * `composer install --no-dev`
 * `composer dump -o`
 * `sudo chown www-data:www-data storage`
 * `php artisan config:clear`
 * `php artisan storage:link`
+* `sudo chown www-data:www-data se_system -R`
+
 ### 全清
 ```
 

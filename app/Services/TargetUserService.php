@@ -151,7 +151,7 @@ class TargetUserService extends BaseService
                 if (!$result) {
                     throw new Exception("failed without any message");
                 }
-                DB::commit();;
+                DB::commit();
             } catch (Exception $e) {
                 DB::rollBack();
                 $fields["reason"] = $e->getMessage();
