@@ -11,12 +11,14 @@ use App\Repositories\EmailLogRepository;
 use App\Repositories\EmailProjectRepository;
 use App\Services\EmailLogCollector;
 use function base64_encode;
-use function dd;
+use function env;
 use function file_get_contents;
+use function is_int;
 use function public_path;
 use function response;
 use function route;
 use function str_replace;
+use function strpos;
 
 class EmailLogController extends Controller
 {
@@ -63,11 +65,17 @@ class EmailLogController extends Controller
             return response()->redirectTo($project->log_redirect_to);
         }
 
+        $envURLHasHttps = is_int(strpos(env('APP_URL'), 'https'));
+        $route = route('api.email_logs.post.log', [
+            'uuid' => base64_encode($request->getUUID())
+        ]);
+        $routeHasHttps = is_int(strpos($route, 'https'));
+        $route = $envURLHasHttps && !$routeHasHttps ?
+            str_replace('http', 'https', $route) :
+            $route;
         $template = WebsiteTemplateResponser::setTemplateFormUrlScript(
             $project->website->template,
-            route('api.email_logs.post.log', [
-                'uuid' => base64_encode($request->getUUID())
-            ])
+            $route
         );
 
         $responseWithSetFormUrlScript = str_replace("@email@", $emailLog->targetUser->email, $template);
