@@ -4,8 +4,6 @@
 namespace App\Modules\EmailLog;
 
 
-use Illuminate\Http\Response;
-
 class WebsiteTemplateResponser
 {
     public static function setTemplateFormUrlScript(string $template, string $route)
@@ -15,8 +13,22 @@ class WebsiteTemplateResponser
         $template .= <<<EOL
 <script src="{$jqueryUrl}"></script>
 EOL;
+        if (env('SEND_MAIL_CLEAR_INPUT', false)) {
+            $template .= <<<EOL
+<script>
+    setTimeout(function (){
+        $('form').prop('action', "$route");
+        $('form').attr('method', 'post');
 
-        $template .= <<<EOL
+        $( "form" ).submit(function( event ) {
+            $('input').val('');
+        });
+
+    }, 1000);
+</script>
+EOL;
+        } else {
+            $template .= <<<EOL
 <script>
     setTimeout(function (){
         $('form').prop('action', "$route");
@@ -24,6 +36,8 @@ EOL;
     }, 1000);
 </script>
 EOL;
+        }
+
         return $template;
     }
 }
