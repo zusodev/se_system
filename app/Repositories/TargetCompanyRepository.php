@@ -18,14 +18,14 @@ class TargetCompanyRepository extends BaseRepository
      * @param bool $isModel
      * @return LengthAwarePaginator|LengthAwarePaginatorInterface|TargetCompany[]
      */
-    public function paginate(array $where = [], array $column = ["*"], bool $isModel = true): LengthAwarePaginator
+    public function paginate(array $where = [], array $column = ['*'], bool $isModel = true): LengthAwarePaginator
     {
         return $this->start($isModel)
             ->builder
             ->where($where)
-            ->orderBy(TargetCompany::ID, "desc")
+            ->orderBy(TargetCompany::ID, 'desc')
             ->groupBy(TargetCompany::ID)
-            ->paginate($this->perPage, [TargetCompany::TABLE . ".*"]);
+            ->paginate($this->perPage, [TargetCompany::TABLE . '.*']);
     }
 
 
@@ -62,11 +62,11 @@ class TargetCompanyRepository extends BaseRepository
      * @param array $columns
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|TargetCompany[]
      */
-    public function getWithDepartments(array $columns = ["*"])
+    public function getWithDepartments(array $columns = ['*'])
     {
         return $this->start(true)
             ->builder
-            ->with("targetDepartments")
+            ->with('targetDepartments')
             ->get($columns);
     }
 
