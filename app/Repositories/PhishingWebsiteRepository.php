@@ -18,29 +18,29 @@ class PhishingWebsiteRepository extends BaseRepository
         return $this->start(true)
             ->joinWithProjectUsed()
             ->builder
-            ->orderBy(PhishingWebsite::ID, "desc")
+            ->orderBy(PhishingWebsite::ID, 'desc')
             ->groupBy(PhishingWebsite::ID)
             ->paginate($this->perPage, [
                 PhishingWebsite::ID,
-                PhishingWebsite::TABLE . ".name",
-                PhishingWebsite::TABLE . ".received_form_data_is_ok",
-                "sub.project_count",
+                PhishingWebsite::TABLE . '.name',
+                PhishingWebsite::TABLE . '.received_form_data_is_ok',
+                'sub.project_count',
             ]);
     }
 
     protected function joinWithProjectUsed()
     {
         $builder = DB::table(PhishingWebsite::TABLE)
-            ->leftJoin(EmailProject::TABLE, PhishingWebsite::ID, "=", EmailProject::PHISHING_WEBSITE_ID)
-            ->select(["phishing_website.id as phishing_website_id"])
-            ->selectRaw("COUNT(email_project.id)  as project_count")
+            ->leftJoin(EmailProject::TABLE, PhishingWebsite::ID, '=', EmailProject::PHISHING_WEBSITE_ID)
+            ->select(['phishing_website.id as phishing_website_id'])
+            ->selectRaw('COUNT(email_project.id)  as project_count')
             ->groupBy(PhishingWebsite::ID);
 
         $this->builder->leftJoin(
             DB::raw("( {$builder->toSql()} ) as `sub`"),
             PhishingWebsite::ID,
-            "=",
-            "sub.phishing_website_id"
+            '',
+            'sub.phishing_website_id'
         );
         return $this;
     }
@@ -55,10 +55,10 @@ class PhishingWebsiteRepository extends BaseRepository
 
     public function update(int $id, array $attributes)
     {
-        $attributes["received_form_data_is_ok"] = false;
+        $attributes['received_form_data_is_ok'] = false;
 
         return $this->getBuilderWithStart(true)
-            ->where("id", $id)
+            ->where('id', $id)
             ->update($attributes);
     }
 

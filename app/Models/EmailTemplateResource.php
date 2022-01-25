@@ -7,21 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmailTemplateResource extends Model
 {
-    const TABLE = "email_template_resource";
+    const TABLE = 'email_template_resource';
 
     protected $table = self::TABLE;
 
     protected $fillable = [
-        "file_name",
-        "email_template_id",
+        'file_name',
+        'email_template_id',
     ];
 
     public function emailTemplate()
     {
         return $this->belongsTo(
             EmailTemplate::class,
-            "email_template_id",
-            "id"
+            'email_template_id',
+            'id'
         );
     }
 }

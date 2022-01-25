@@ -11,10 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /*$fileNames = ["e_t_resources", "p_w_resources"];
+        /*$fileNames = ['e_t_resources', 'p_w_resources'];
         foreach ($fileNames as $fileName) {
-            $storage = Storage::disk("local");
-            $path = "public/" . $fileName;
+            $storage = Storage::disk('local');
+            $path = 'public/' . $fileName;
 
             if ($storage->exists($path)) {
                 $storage->deleteDirectory($path);

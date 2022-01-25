@@ -18,7 +18,7 @@ class PhishingWebsiteRequest extends FormRequest
     {
         $route = Route::getCurrentRoute();
         $baseRules = [
-            "name" => ["required", "string", "max:191"],
+            'name' => ['required', 'string', "max:191"],
             "template" => ["nullable", "string", "max:16700000"],
         ];
         switch ($route) {

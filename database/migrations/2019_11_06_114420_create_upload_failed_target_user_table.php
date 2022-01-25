@@ -16,11 +16,11 @@ class CreateUploadFailedTargetUserTable extends Migration
     {
         Schema::create(UploadFailedTargetUser::TABLE, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string("company_name",191);
-            $table->string("name",191);
-            $table->string("email",191);
-            $table->string("file_name",191);
-            $table->dateTime("uploaded_at");
+            $table->string('company_name',191);
+            $table->string('name',191);
+            $table->string('email',191);
+            $table->string('file_name',191);
+            $table->dateTime('uploaded_at');
         });
     }
 

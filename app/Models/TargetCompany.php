@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class TargetCompany extends Model
 {
-    const TABLE = "target_company";
-    const ID = self::TABLE . ".id";
+    const TABLE = 'target_company';
+    const ID = self::TABLE . '.id';
     const NAME = self::TABLE . ".name";
 
     protected $table = self::TABLE;
