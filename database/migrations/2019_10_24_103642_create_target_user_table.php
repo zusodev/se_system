@@ -11,16 +11,16 @@ class CreateTargetUserTable extends Migration
     public function up()
     {
         Schema::create(TargetUser::TABLE, function (Blueprint $table) {
-            $table->increments("id");
-            $table->string("name");
-            $table->string("email");
+            $table->increments('id');
+            $table->string('name');
+            $table->string('email');
 
-            $table->unsignedInteger("department_id");
-            $table->foreign("department_id")
-                ->references("id")
+            $table->unsignedInteger('department_id');
+            $table->foreign('department_id')
+                ->references('id')
                 ->on(TargetDepartment::TABLE);
 
-            $table->unique(["department_id", "email"]);
+            $table->unique(['department_id', 'email']);
 
             $table->timestamps();
         });

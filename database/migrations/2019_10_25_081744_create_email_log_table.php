@@ -12,24 +12,24 @@ class CreateEmailLogTable extends Migration
     public function up()
     {
         Schema::create(EmailLog::TABLE, function (Blueprint $table) {
-            $table->increments("id");
-            $table->string("uuid")->unique();
-            $table->unsignedInteger("job_id");
-            $table->foreign("job_id")
-                ->references("id")
+            $table->increments('id');
+            $table->string('uuid')->unique();
+            $table->unsignedInteger('job_id');
+            $table->foreign('job_id')
+                ->references('id')
                 ->on(EmailJob::TABLE);
 
-            $table->unsignedInteger("target_user_id");
-            $table->foreign("target_user_id")
-                ->references("id")
+            $table->unsignedInteger('target_user_id');
+            $table->foreign('target_user_id')
+                ->references('id')
                 ->on(TargetUser::TABLE);
 
-            $table->boolean("is_send")->default(false);
-            $table->boolean("is_open")->default(false);
-            $table->boolean("is_open_link")->default(false);
-            $table->boolean("is_open_attachment")->default(false);
-            $table->boolean("is_post_from_website")->default(false);
-            $table->unique(["job_id", "target_user_id"]);
+            $table->boolean('is_send')->default(false);
+            $table->boolean('is_open')->default(false);
+            $table->boolean('is_open_link')->default(false);
+            $table->boolean('is_open_attachment')->default(false);
+            $table->boolean('is_post_from_website')->default(false);
+            $table->unique(['job_id', 'target_user_id']);
             $table->timestamps();
         });
     }

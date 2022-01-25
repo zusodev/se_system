@@ -174,7 +174,7 @@ class ReportRepository
 
 
             $fn = function ($bool): string {
-                return $bool ? "是" : "否";
+                return $bool ? '是' : '否';
             };
             $jsonFn = function ($json) {
                 $jsonStr = '';

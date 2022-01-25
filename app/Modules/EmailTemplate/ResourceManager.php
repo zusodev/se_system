@@ -10,11 +10,11 @@ class ResourceManager extends BaseResourceManager
 {
     public function generateUrl(string $fileName): string
     {
-        return "/storage/e_t_resources/" . $this->emailTemplateId . "/" . $fileName;
+        return '/storage/e_t_resources/' . $this->emailTemplateId . '/' . $fileName;
     }
 
     protected function getStorageDiskName(): string
     {
-        return "email_template_resources";
+        return 'email_template_resources';
     }
 }
