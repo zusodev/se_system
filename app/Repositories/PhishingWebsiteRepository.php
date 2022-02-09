@@ -39,7 +39,7 @@ class PhishingWebsiteRepository extends BaseRepository
         $this->builder->leftJoin(
             DB::raw("( {$builder->toSql()} ) as `sub`"),
             PhishingWebsite::ID,
-            '',
+            '=',
             'sub.phishing_website_id'
         );
         return $this;
