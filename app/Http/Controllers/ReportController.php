@@ -37,7 +37,7 @@ class ReportController extends Controller
         $typeText = '';
         switch ($type) {
             case 'open_mail_users_csv':
-                $typeText = 'CSV 開啟信件名單';
+                $typeText = 'CSV 開啟連結名單';
                 break;
             case 'word':
                 $typeText = 'Word 報告書';
@@ -63,7 +63,7 @@ class ReportController extends Controller
                 case 'open_mail_users_csv':
                     return $this->csvResponse(
                         $this->reportRepository->openMailUsersCsv($projectIds),
-                        $emailProject->name . '_開啟信件名單'
+                        $emailProject->name . '_開啟連結名單'
                     );
                 case 'word':
                     $extension = '.docx';

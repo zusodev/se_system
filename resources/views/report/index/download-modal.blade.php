@@ -20,7 +20,7 @@
                 <h6>CSV：</h6>
                 <div class="form-group row">
                     <button type="button" class="m-1 btn btn-outline-warning"
-                            onclick="startDownload('open_mail_users_csv')">開啟信件名單
+                            onclick="startDownload('open_mail_users_csv')">開啟連結名單
                     </button>
                 </div>
             </div>
