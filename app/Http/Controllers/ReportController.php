@@ -8,10 +8,11 @@ use App\Modules\WordReport\WordReportGenerator;
 use Exception;
 use Log;
 use function array_merge;
-use function dd;
+use function env;
 use function explode;
 use function request;
 use function response;
+use function str_replace;
 use function view;
 
 class ReportController extends Controller
@@ -45,10 +46,14 @@ class ReportController extends Controller
         }
 
 
+        $route = route('report.download', [$emailProject->id, $type]);
+        if (strpos(env('APP_URL'), 'https') !== false) {
+            $route = str_replace('http', 'https', $route);
+        }
         return view('report.download-page', [
             'projectName' => $emailProject->name,
             'name' => $typeText . ' 下載',
-            'downloadReportUrl' => route('report.download', [$emailProject->id, $type])
+            'downloadReportUrl' => $route
         ]);
     }
 
