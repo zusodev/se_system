@@ -27,21 +27,20 @@ class EmailJob extends Model
     protected $table = self::TABLE;
 
     protected $fillable = [
-        "project_id",
-        "department_id",
-        "status",
-        "send_total",
-        "expected_send_total",
+        'project_id',
+        'department_id',
+        'status',
+        'send_total',
+        'expected_send_total',
     ];
 
     public function targetDepartment()
     {
-        return $this->belongsTo(TargetDepartment::class, "department_id", "id");
+        return $this->belongsTo(TargetDepartment::class, 'department_id', 'id');
     }
 
     public function emailProject()
     {
-        return $this->belongsTo(EmailProject::class, "project_id", "id");
+        return $this->belongsTo(EmailProject::class, 'project_id', 'id');
     }
-
 }

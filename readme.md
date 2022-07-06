@@ -24,7 +24,7 @@ sudo mysql -u root -p se_db <
 ```
 [program:laravel-worker]
 process_name=%(program_name)s_%(process_num)02d
-command=/usr/bin/php /var/www/se_system/artisan queue:work --sleep=3 --tries=1 --memory=2048 --timeout=0
+command=/usr/bin/php /var/www/{project}/artisan queue:work --tries=0 --memory=2048 --timeout=30
 autostart=true
 autorestart=true
 user=www-data
