@@ -63,9 +63,9 @@ class EmailProjectRepository extends BaseRepository
     {
         return $this->getBuilderWithStart(true)
             ->join(EmailJob::TABLE, EmailProject::ID, "=", EmailJob::PROJECT_ID)
-            ->join(EmailLog::TABLE, EmailJob::ID, "=", EmailLog::JOB_ID)
+            ->join(EmailLog::TABLE, EmailJob::T_ID, "=", EmailLog::T_JOB_ID)
             ->where([
-                [EmailLog::ID, $logId]
+                [EmailLog::T_ID, $logId]
             ])
             ->first();
     }

@@ -11,6 +11,9 @@ class EmailDetailLog extends Model
     const T_ACTION = self::TABLE . ".action";
     const T_REQUEST_BODY = self::TABLE . ".request_body";
     const T_LOG_ID = self::TABLE . ".log_id";
+    const T_IS_TW_IP = self::TABLE . '.is_tw_ip';
+
+    const ACTION_IS_POST_FROM_WEBSITE = 'is_post_from_website';
 
     const LOG_ID = 'log_id';
     const IPS = 'ips';

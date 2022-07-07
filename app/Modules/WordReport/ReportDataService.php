@@ -17,8 +17,8 @@ class ReportDataService
     /** @var ReportRepository */
     protected $reportRepository;
 
-    /** @var EmailProject[]|\Illuminate\Database\Eloquent\Collection */
-    protected $emailProjects;
+    /** @var EmailProject */
+    protected $emailProject;
 
     protected $projectIds = [];
 
@@ -42,25 +42,25 @@ class ReportDataService
     public function setData(array $projectIds)
     {
         $this->projectIds = $projectIds;
-        $this->emailProjects = EmailProject::whereIn('id', $projectIds)
+        $this->emailProject = EmailProject::whereIn('id', $projectIds)
             ->orderByDesc('id')
-            ->get();
-        $this->company = $this->emailProjects[0]->company;
+            ->first();
+        $this->company = $this->emailProject->company;
     }
 
-    public function getFirstProject(): EmailProject
+    public function getFirstProject()
     {
-        return $this->emailProjects[0];
+        return $this->emailProject;
     }
 
     public function getFirstProjectName()
     {
-        return $this->emailProjects[0]->name;
+        return $this->emailProject->name;
     }
 
     public function getFirstCompanyName(): string
     {
-        return $this->emailProjects[0]->company->name;
+        return $this->emailProject->company->name;
     }
 
     public function allActionLogCount()

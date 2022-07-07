@@ -57,7 +57,7 @@ class EmailLogRepository extends BaseRepository
         return $this->start()
             ->builder
             ->where([
-                [EmailLog::JOB_ID, $jobId],
+                [EmailLog::T_JOB_ID, $jobId],
                 [EmailLog::IS_SEND, true],
             ])
             ->count();
@@ -134,7 +134,7 @@ class EmailLogRepository extends BaseRepository
 
     private function joinEmailJob(): self
     {
-        $this->builder->join(EmailJob::TABLE, EmailLog::JOB_ID, EmailJob::ID);
+        $this->builder->join(EmailJob::TABLE, EmailLog::T_JOB_ID, EmailJob::T_ID);
         return $this;
     }
 
@@ -166,7 +166,7 @@ class EmailLogRepository extends BaseRepository
 
             return DB::table(EmailLog::TABLE)
                 ->where([
-                    [EmailLog::JOB_ID, $jobId],
+                    [EmailLog::T_JOB_ID, $jobId],
                     $where
                 ])
                 ->selectRaw("COUNT(*) AS count")
