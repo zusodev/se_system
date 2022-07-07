@@ -4,9 +4,12 @@ namespace App\Providers;
 
 use App\Modules\WordReport\ReportDataService;
 use App\Modules\WordReport\ReportRepository;
+use App\Repositories\BaseRepository;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Schema;
+use function config;
+use function dump;
 use function var_dump;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,12 +37,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*if (config("app.env") != "production") {
+/*        if (config('app.env') != 'production') {
             \DB::listen(function ($event) {
                 AppServiceProvider::$num++;
+                dump('監聽 Query :' . AppServiceProvider::$num);
                 $sql = \App\Repositories\BaseRepository::getQueryWithBindings($event->sql, $event->bindings);
-                var_dump($sql);
-                echo '<br>';
+                $sql = BaseRepository::getQueryWithBindings($event->sql, $event->bindings);
+                dump($sql);
             });
         }*/
     }
