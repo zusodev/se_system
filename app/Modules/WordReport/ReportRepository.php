@@ -94,7 +94,7 @@ class ReportRepository
         }
 
         if ($isJoinDetailLog) {
-            $builder->join(EmailDetailLog::TABLE, EmailLog::ID, EmailDetailLog::LOG_ID);
+            $builder->join(EmailDetailLog::TABLE, EmailLog::ID, EmailDetailLog::T_LOG_ID);
         }
 
         return $builder;

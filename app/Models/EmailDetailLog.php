@@ -7,12 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class EmailDetailLog extends Model
 {
     const TABLE = "email_detail_logs";
-    const ID = self::TABLE . '.id';
+    const T_ID = self::TABLE . '.id';
+    const T_ACTION = self::TABLE . ".action";
+    const T_REQUEST_BODY = self::TABLE . ".request_body";
+    const T_LOG_ID = self::TABLE . ".log_id";
 
-    const ACTION = self::TABLE . ".action";
-
-    const REQUEST_BODY = self::TABLE . ".request_body";
-    const LOG_ID = self::TABLE . ".log_id";
+    const LOG_ID = 'log_id';
+    const IPS = 'ips';
+    const AGENT = 'agent';
+    const ACTION = 'action';
+    const REQUEST_BODY = 'request_body';
+    const IS_TW_IP = 'is_tw_ip';
 
     protected $table = self::TABLE;
 
@@ -22,11 +27,12 @@ class EmailDetailLog extends Model
      * 2. { "ips": ["127.0.0.1"], "HTTP_X_FORWARD_FOR" => "127.0.0.1", "HTTP_X_REAL_IP" => "127.0.0.1" }
      */
     protected $fillable = [
-        "log_id",
-        "ips",
-        "agent",
-        "action",
-        "request_body",
+        self::LOG_ID,
+        self::IPS,
+        self::IS_TW_IP,
+        self::AGENT,
+        self::ACTION,
+        self::REQUEST_BODY,
     ];
 
     public function actionHtml(): string
