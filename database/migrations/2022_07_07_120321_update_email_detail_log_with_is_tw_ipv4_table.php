@@ -13,7 +13,7 @@ class UpdateEmailDetailLogWithIsTwIpv4Table extends Migration
             $table->boolean(EmailDetailLog::IS_TW_IP)
                 ->nullable()
                 ->default(null);
-        });git 
+        });
 
     }
 
