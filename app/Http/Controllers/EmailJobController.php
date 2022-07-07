@@ -76,7 +76,7 @@ class EmailJobController extends Controller
             return response()->redirectTo($indexRoute);
         }
         $logPaginator = $logRepository->paginate([
-            [EmailLog::JOB_ID, $id]
+            [EmailLog::T_JOB_ID, $id]
         ]);
 
         $chartData = $logRepository->getCounts($id);

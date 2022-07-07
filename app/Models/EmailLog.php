@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 class EmailLog extends Model
 {
     use TaiwanDateTimeTrait;
-    const TABLE = "email_log";
-    const ID = self::TABLE . ".id";
+    const TABLE = 'email_log';
+    const T_ID = self::TABLE . '.id';
     const UUID = self::TABLE . ".uuid";
-    const JOB_ID = self::TABLE . ".job_id";
+    const T_JOB_ID = self::TABLE . ".job_id";
     const TARGET_USER_ID = self::TABLE . ".target_user_id";
 
     const IS_SEND = self::TABLE . ".is_send";

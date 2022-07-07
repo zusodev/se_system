@@ -62,7 +62,7 @@ class ReportRepository
     public function actionCountGroupByDepartment(array $where, array $projectIds)
     {
         $builder = $this->baseProjectWithoutTestDepartment()
-            ->groupBy(EmailJob::ID)
+            ->groupBy(EmailJob::T_ID)
             ->where($where)
             ->whereIn(EmailProject::ID, $projectIds)
             ->select([
@@ -82,7 +82,7 @@ class ReportRepository
     {
         $builder = DB::table(EmailProject::TABLE)
             ->join(EmailJob::TABLE, EmailProject::ID, EmailJob::PROJECT_ID)
-            ->join(EmailLog::TABLE, EmailJob::ID, EmailLog::JOB_ID)
+            ->join(EmailLog::TABLE, EmailJob::T_ID, EmailLog::T_JOB_ID)
             ->join(TargetCompany::TABLE, EmailProject::COMPANY_ID, TargetCompany::ID)
             ->join(TargetDepartment::TABLE, function (JoinClause $join) {
                 return $join->on(EmailJob::DEPARTMENT_ID, TargetDepartment::ID)
@@ -94,7 +94,17 @@ class ReportRepository
         }
 
         if ($isJoinDetailLog) {
-            $builder->join(EmailDetailLog::TABLE, EmailLog::ID, EmailDetailLog::LOG_ID);
+            $builder->join(
+                EmailDetailLog::TABLE,
+                EmailLog::T_ID,
+                EmailDetailLog::T_LOG_ID
+            )
+                // 這裡是過濾台灣 IP
+                ->where(EmailDetailLog::T_IS_TW_IP, true)
+                ->orWhere(
+                    EmailDetailLog::T_ACTION,
+                    EmailDetailLog::ACTION_IS_POST_FROM_WEBSITE
+                );
         }
 
         return $builder;
@@ -116,7 +126,7 @@ class ReportRepository
 
         $builder = $this->baseProjectWithoutTestDepartment()
             ->whereIn(EmailProject::ID, $projectIds)
-            ->groupBy(EmailJob::ID)
+            ->groupBy(EmailJob::T_ID)
             ->select($selectedColumn);
         foreach ($columns as $key => $columnName) {
             $builder->orderByDesc($columnName);
@@ -132,8 +142,7 @@ class ReportRepository
             EmailLog::IS_OPEN_LINK,
             EmailLog::IS_OPEN_ATTACHMENT,
             EmailLog::IS_POST_FROM_WEBSITE,
-        ])
-            ->whereIn(EmailProject::ID, $where);
+        ])->whereIn(EmailProject::ID, $where);
         $columns = [
             'is_open',
             'is_open_link',

@@ -10,9 +10,9 @@ class EmailJob extends Model
 {
     use TaiwanDateTimeTrait;
     const TABLE = "email_job";
-    const ID = self::TABLE . ".id";
+    const T_ID = self::TABLE . ".id";
 
-    const PROJECT_ID = "project_id";
+    const PROJECT_ID = 'project_id';
     const DEPARTMENT_ID = self::TABLE . ".department_id";
     const STATUS = self::TABLE . ".status";
     const SEND_TOTAL = self::TABLE . ".send_total";

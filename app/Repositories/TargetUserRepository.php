@@ -111,7 +111,7 @@ class TargetUserRepository extends BaseRepository
     {
         $this->builder->leftJoin(EmailLog::TABLE, function (JoinClause $join) use ($jobId) {
             $join->on(TargetUser::ID, '=', EmailLog::TARGET_USER_ID)
-                ->where(EmailLog::JOB_ID, $jobId);
+                ->where(EmailLog::T_JOB_ID, $jobId);
         })->where([
             [EmailLog::TARGET_USER_ID, '=', null]
         ]);

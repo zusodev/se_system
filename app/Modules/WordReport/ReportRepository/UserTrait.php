@@ -23,9 +23,9 @@ trait UserTrait
     protected function firstBuilder(array $columns = [])
     {
         $oldColumns = [
-            EmailDetailLog::ID,
-            EmailDetailLog::LOG_ID,
-            EmailDetailLog::REQUEST_BODY,
+            EmailDetailLog::T_ID,
+            EmailDetailLog::T_LOG_ID,
+            EmailDetailLog::T_REQUEST_BODY,
             TargetUser::NAME,
             TargetUser::EMAIL,
             EmailJob::DEPARTMENT_ID,
@@ -42,7 +42,7 @@ trait UserTrait
                 "),
         ];
         return $this->baseProjectWithoutTestDepartment(true, true)
-            ->groupBy([EmailDetailLog::LOG_ID, EmailDetailLog::ACTION])
+            ->groupBy([EmailDetailLog::T_LOG_ID, EmailDetailLog::T_ACTION])
             ->orderByDesc(EmailJob::DEPARTMENT_ID)
             ->select(array_merge($oldColumns, $columns));
     }
